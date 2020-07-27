@@ -1,3 +1,11 @@
+
+### NOTE: This is a test fork to see how excalidraw can be extended with ui customization instead of using the excalidraw-embed projects. 
+
+The idea is see if we can have a "branded" version of excalidraw which is hosted completely independantly ( on an intranet like environment )  . Lets see how this works :)
+
+----
+
+
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://excalidraw.com">
     <img src="./public/og-image.png" alt="Excalidraw logo: Sketch handrawn like diagrams." />
