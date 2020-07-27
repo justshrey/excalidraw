@@ -119,11 +119,11 @@ export const exportToSvg = (
     <style>
       @font-face {
         font-family: "Virgil";
-        src: url("https://excalidraw.com/FG_Virgil.woff2");
+        src: url("%REACT_APP_SERVER_URL%/FG_Virgil.woff2");
       }
       @font-face {
         font-family: "Cascadia";
-        src: url("https://excalidraw.com/Cascadia.woff2");
+        src: url("%REACT_APP_SERVER_URL%/Cascadia.woff2");
       }
     </style>
   </defs>
