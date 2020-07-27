@@ -6,6 +6,7 @@ import {
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_FAMILY,
   DEFAULT_TEXT_ALIGN,
+  GRID_SIZE,
 } from "./constants";
 
 export const getDefaultAppState = (): AppState => {
@@ -53,7 +54,7 @@ export const getDefaultAppState = (): AppState => {
     shouldCacheIgnoreZoom: false,
     showShortcutsDialog: false,
     zenModeEnabled: false,
-    gridSize: null,
+    gridSize: GRID_SIZE,
     editingGroupId: null,
     selectedGroupIds: {},
     width: window.innerWidth,
