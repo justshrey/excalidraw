@@ -11,6 +11,8 @@ import { t } from "../i18n";
 import { DEFAULT_FONT_FAMILY, DEFAULT_VERTICAL_ALIGN } from "../constants";
 
 export const SVG_EXPORT_TAG = `<!-- svg-source:excalidraw -->`;
+export const REACT_APP_SOCKET_SERVER_URL =
+  process.env.REACT_APP_SOCKET_SERVER_URL;
 
 export const exportToCanvas = (
   elements: readonly NonDeletedExcalidrawElement[],
@@ -119,11 +121,11 @@ export const exportToSvg = (
     <style>
       @font-face {
         font-family: "Virgil";
-        src: url("%REACT_APP_SERVER_URL%/FG_Virgil.woff2");
+        src: url("${REACT_APP_SOCKET_SERVER_URL}FG_Virgil.woff2");
       }
       @font-face {
         font-family: "Cascadia";
-        src: url("%REACT_APP_SERVER_URL%/Cascadia.woff2");
+        src: url("${REACT_APP_SOCKET_SERVER_URL}/Cascadia.woff2");
       }
     </style>
   </defs>
