@@ -63,7 +63,8 @@ export type ActionName =
   | "group"
   | "ungroup"
   | "goToCollaborator"
-  | "addToLibrary";
+  | "addToLibrary"
+  | "changeLockStatus";
 
 export interface Action {
   name: ActionName;

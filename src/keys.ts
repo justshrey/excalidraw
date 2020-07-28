@@ -20,6 +20,7 @@ export const KEYS = {
   G_KEY_CODE: 71,
   C_KEY_CODE: 67,
   V_KEY_CODE: 86,
+  L_KEY_CODE: 76,
 } as const;
 
 export type Key = keyof typeof KEYS;

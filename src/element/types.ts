@@ -22,6 +22,7 @@ type _ExcalidrawElementBase = Readonly<{
   versionNonce: number;
   isDeleted: boolean;
   groupIds: readonly GroupId[];
+  isLocked?: boolean; //Lock the element and stop it from any operations being applied to it ex
 }>;
 
 export type ExcalidrawSelectionElement = _ExcalidrawElementBase & {

@@ -68,7 +68,10 @@
     "toggleGridMode": "Toggle grid mode",
     "addToLibrary": "Add to library",
     "removeFromLibrary": "Remove from library",
-    "libraryLoadingMessage": "Loading library..."
+    "libraryLoadingMessage": "Loading library...",
+    "locked": "Lock Element",
+    "lock": "Lock",
+    "unlock": "Unlock"
   },
   "buttons": {
     "clearReset": "Reset the canvas",

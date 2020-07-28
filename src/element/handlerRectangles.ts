@@ -47,6 +47,19 @@ const OMIT_SIDES_FOR_LINE_BACKSLASH = {
   rotation: true,
 };
 
+const OMIT_ALL_SIDES_FOR_LOCKED_ELEMENT = {
+  e: true,
+  s: true,
+  n: true,
+  w: true,
+  ne: true,
+  nw: true,
+  se: true,
+  sw: true,
+
+  rotation: true,
+};
+
 const generateHandler = (
   x: number,
   y: number,
@@ -229,6 +242,10 @@ export const handlerRectangles = (
     }
   } else if (element.type === "text") {
     omitSides = OMIT_SIDES_FOR_TEXT_ELEMENT;
+  }
+
+  if (element.isLocked === true) {
+    omitSides = OMIT_ALL_SIDES_FOR_LOCKED_ELEMENT;
   }
 
   return handlerRectanglesFromCoords(

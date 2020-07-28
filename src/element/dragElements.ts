@@ -11,6 +11,9 @@ export const dragSelectedElements = (
 ) => {
   const [x1, y1] = getCommonBounds(selectedElements);
   selectedElements.forEach((element) => {
+    if (element.isLocked) {
+      return;
+    }
     mutateElement(element, {
       x: pointerX + element.x - x1,
       y: pointerY + element.y - y1,

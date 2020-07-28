@@ -80,6 +80,7 @@ export const SelectedShapeActions = ({
             {renderAction("deleteSelectedElements")}
             {renderAction("group")}
             {renderAction("ungroup")}
+            {renderAction("changeLockStatus")}
           </div>
         </fieldset>
       )}

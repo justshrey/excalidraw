@@ -1,4 +1,5 @@
 import React from "react";
+import { KEYS } from "../keys";
 import {
   ExcalidrawElement,
   ExcalidrawTextElement,
@@ -444,6 +445,48 @@ export const actionChangeTextAlign = register({
           appState.currentItemTextAlign,
         )}
         onChange={(value) => updateData(value)}
+      />
+    </fieldset>
+  ),
+});
+
+export const actionChangeLockedStatus = register({
+  name: "changeLockStatus",
+  perform: (elements, appState, value) => {
+    return {
+      elements: changeProperty(elements, appState, (el) =>
+        newElementWith(el, {
+          isLocked: value,
+        }),
+      ),
+      appState: { ...appState, currentItemLockStatus: value },
+      commitToHistory: true,
+    };
+  },
+  contextItemLabel: "labels.locked",
+  contextMenuOrder: 3,
+  keyTest: (event) =>
+    event[KEYS.CTRL_OR_CMD] &&
+    event.altKey &&
+    event.keyCode === KEYS.L_KEY_CODE,
+  PanelComponent: ({ elements, appState, updateData }) => (
+    <fieldset>
+      <legend>{t("labels.locked")}</legend>
+      <ButtonSelect
+        options={[
+          { value: true, text: t("labels.lock") },
+          { value: false, text: t("labels.unlock") },
+        ]}
+        group="lock"
+        value={getFormValue(
+          elements,
+          appState,
+          (element) => (element.isLocked ? true : false),
+          appState.currentItemLockStatus,
+        )}
+        onChange={(value) => {
+          updateData(value);
+        }}
       />
     </fieldset>
   ),

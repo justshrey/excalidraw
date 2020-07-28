@@ -62,6 +62,7 @@ export const actionDuplicateSelection = register({
               {
                 x: element.x + 10,
                 y: element.y + 10,
+                isLocked: false,
               },
             );
             appState.selectedElementIds[newElement.id] = true;

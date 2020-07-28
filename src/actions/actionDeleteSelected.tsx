@@ -18,7 +18,7 @@ const deleteSelectedElements = (
 ) => {
   return {
     elements: elements.map((el) => {
-      if (appState.selectedElementIds[el.id]) {
+      if (appState.selectedElementIds[el.id] && !el.isLocked) {
         return newElementWith(el, { isDeleted: true });
       }
       return el;

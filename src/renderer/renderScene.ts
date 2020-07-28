@@ -250,7 +250,7 @@ export const renderScene = (
     context.translate(sceneState.scrollX, sceneState.scrollY);
 
     const selections = elements.reduce((acc, element) => {
-      const selectionColors = [];
+      const selectionColors: string[] = [];
       // local user
       if (
         appState.selectedElementIds[element.id] &&
@@ -258,6 +258,7 @@ export const renderScene = (
       ) {
         selectionColors.push(oc.black);
       }
+
       // remote users
       if (sceneState.remoteSelectedElementIds[element.id]) {
         selectionColors.push(
@@ -267,6 +268,17 @@ export const renderScene = (
           }),
         );
       }
+
+      // If its locked - just color it red only
+      if (
+        element.isLocked &&
+        appState.selectedElementIds[element.id] &&
+        !isSelectedViaGroup(appState, element)
+      ) {
+        selectionColors.length = 0; // empty all colors - just the red selection only
+        selectionColors.push(oc.red[9]);
+      }
+
       if (selectionColors.length) {
         const [
           elementX1,
@@ -291,13 +303,14 @@ export const renderScene = (
       const [elementX1, elementY1, elementX2, elementY2] = getCommonBounds(
         groupElements,
       );
+
       selections.push({
         angle: 0,
         elementX1,
         elementX2,
         elementY1,
         elementY2,
-        selectionColors: [oc.black],
+        selectionColors: [oc.red[9]],
       });
     }
 
