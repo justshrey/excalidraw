@@ -9,7 +9,10 @@ import {
   GRID_SIZE,
 } from "./constants";
 
-export const getDefaultAppState = (): AppState => {
+export const getDefaultAppState = (): Omit<
+  AppState,
+  "offsetTop" | "offsetLeft"
+> => {
   return {
     isLoading: false,
     errorMessage: null,
@@ -127,6 +130,8 @@ const APP_STATE_STORAGE_CONF = (<
   width: { browser: false, export: false },
   zenModeEnabled: { browser: true, export: false },
   zoom: { browser: true, export: false },
+  offsetTop: { browser: false, export: false },
+  offsetLeft: { browser: false, export: false },
 });
 
 const _clearAppStateForStorage = <ExportType extends "export" | "browser">(
