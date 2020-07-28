@@ -21,6 +21,9 @@ declare namespace NodeJS {
     readonly REACT_APP_BACKEND_V2_POST_URL: string;
     readonly REACT_APP_SOCKET_SERVER_URL: string;
     readonly REACT_APP_SERVER_URL: string;
+    readonly REACT_APP_ENABLE_EXTENDED_COLOR_PICKER: boolean;
+    readonly REACT_APP_ENABLE_EXTRA_BRAND_COLORS: string;
+    readonly REACT_APP_DISABLE_INBUILT_COLORS: boolean;
   }
 }
 

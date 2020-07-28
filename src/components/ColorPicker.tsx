@@ -1,4 +1,5 @@
 import React from "react";
+import { ChromePicker } from "react-color";
 import { Popover } from "./Popover";
 
 import "./ColorPicker.scss";
@@ -6,6 +7,11 @@ import { KEYS } from "../keys";
 import { t, getLanguage } from "../i18n";
 import { isWritableElement } from "../utils";
 import colors from "../colors";
+
+export const REACT_APP_ENABLE_EXTENDED_COLOR_PICKER =
+  process.env.REACT_APP_ENABLE_EXTENDED_COLOR_PICKER;
+export const REACT_APP_DISABLE_INBUILT_COLORS =
+  process.env.REACT_APP_DISABLE_INBUILT_COLORS;
 
 const isValidColor = (color: string) => {
   const style = new Option().style;
@@ -38,6 +44,7 @@ const keyBindings = [
 
 const Picker = ({
   colors,
+  extraColors,
   color,
   onChange,
   onClose,
@@ -45,6 +52,7 @@ const Picker = ({
   showInput = true,
 }: {
   colors: string[];
+  extraColors: string[];
   color: string | null;
   onChange: (color: string) => void;
   onClose: () => void;
@@ -131,55 +139,121 @@ const Picker = ({
     >
       <div className="color-picker-triangle color-picker-triangle-shadow"></div>
       <div className="color-picker-triangle"></div>
-      <div
-        className="color-picker-content"
-        ref={(el) => {
-          if (el) {
-            gallery.current = el;
-          }
-        }}
-      >
-        {colors.map((_color, i) => (
-          <button
-            className="color-picker-swatch"
-            onClick={(event) => {
-              (event.currentTarget as HTMLButtonElement).focus();
-              onChange(_color);
-            }}
-            title={`${_color} — ${keyBindings[i].toUpperCase()}`}
-            aria-label={_color}
-            aria-keyshortcuts={keyBindings[i]}
-            style={{ color: _color }}
-            key={_color}
-            ref={(el) => {
-              if (el && i === 0) {
-                firstItem.current = el;
-              }
-              if (el && _color === color) {
-                activeItem.current = el;
-              }
-            }}
-            onFocus={() => {
-              onChange(_color);
-            }}
-          >
-            {_color === "transparent" ? (
-              <div className="color-picker-transparent"></div>
-            ) : undefined}
-            <span className="color-picker-keybinding">{keyBindings[i]}</span>
-          </button>
-        ))}
-        {showInput && (
-          <ColorInput
-            color={color}
-            label={label}
-            onChange={(color) => {
-              onChange(color);
-            }}
-            ref={colorInput}
-          />
-        )}
-      </div>
+      {extraColors.length > 0 && (
+        <div
+          className="color-picker-content"
+          ref={(el) => {
+            if (el) {
+              gallery.current = el;
+            }
+          }}
+        >
+          {extraColors.map((_color, i) => (
+            <button
+              className="color-picker-swatch"
+              onClick={(event) => {
+                (event.currentTarget as HTMLButtonElement).focus();
+                onChange(_color);
+              }}
+              title={`${_color}`}
+              aria-label={_color}
+              style={{ color: _color }}
+              key={_color}
+              ref={(el) => {
+                if (el && i === 0) {
+                  firstItem.current = el;
+                }
+                if (el && _color === color) {
+                  activeItem.current = el;
+                }
+              }}
+              onFocus={() => {
+                onChange(_color);
+              }}
+            >
+              {_color === "transparent" ? (
+                <div className="color-picker-transparent"></div>
+              ) : undefined}
+            </button>
+          ))}
+          {showInput && (
+            <ColorInput
+              color={color}
+              label={label}
+              onChange={(color) => {
+                onChange(color);
+              }}
+              ref={colorInput}
+            />
+          )}
+        </div>
+      )}
+
+      {!REACT_APP_DISABLE_INBUILT_COLORS && (
+        <div
+          className="color-picker-content"
+          ref={(el) => {
+            if (el) {
+              gallery.current = el;
+            }
+          }}
+        >
+          {colors.map((_color, i) => (
+            <button
+              className="color-picker-swatch"
+              onClick={(event) => {
+                (event.currentTarget as HTMLButtonElement).focus();
+                onChange(_color);
+              }}
+              title={`${_color} — ${keyBindings[i].toUpperCase()}`}
+              aria-label={_color}
+              aria-keyshortcuts={keyBindings[i]}
+              style={{ color: _color }}
+              key={_color}
+              ref={(el) => {
+                if (el && i === 0) {
+                  firstItem.current = el;
+                }
+                if (el && _color === color) {
+                  activeItem.current = el;
+                }
+              }}
+              onFocus={() => {
+                onChange(_color);
+              }}
+            >
+              {_color === "transparent" ? (
+                <div className="color-picker-transparent"></div>
+              ) : undefined}
+              <span className="color-picker-keybinding">{keyBindings[i]}</span>
+            </button>
+          ))}
+          {showInput && (
+            <ColorInput
+              color={color}
+              label={label}
+              onChange={(color) => {
+                onChange(color);
+              }}
+              ref={colorInput}
+            />
+          )}
+        </div>
+      )}
+
+      {REACT_APP_ENABLE_EXTENDED_COLOR_PICKER ? (
+        <ChromePicker
+          className=""
+          disableAlpha={true}
+          color={color == null ? "#FFFFFF" : color}
+          onChange={(color) => {
+            onChange(color.hex);
+          }}
+          onChangeComplete={(color) => {
+            onChange(color.hex);
+          }}
+        ></ChromePicker>
+      ) : undefined}
     </div>
   );
 };
@@ -280,6 +354,7 @@ export const ColorPicker = ({
           >
             <Picker
               colors={colors[type]}
+              extraColors={colors["extraColors"]}
               color={color || null}
               onChange={(changedColor) => {
                 onChange(changedColor);
