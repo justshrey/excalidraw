@@ -19,7 +19,7 @@ import { adjustXYWithRotation } from "../math";
 import { getResizedElementAbsoluteCoords } from "./bounds";
 
 type ElementConstructorOpts = MarkOptional<
-  Omit<ExcalidrawGenericElement, "id" | "type" | "isDeleted">,
+  Omit<ExcalidrawGenericElement, "id" | "type" | "isDeleted" | "isLocked">,
   | "width"
   | "height"
   | "angle"
@@ -67,6 +67,7 @@ const _newElementBase = <T extends ExcalidrawElement>(
   version: rest.version || 1,
   versionNonce: rest.versionNonce ?? 0,
   isDeleted: false as false,
+  isLocked: false as false,
 });
 
 export const newElement = (

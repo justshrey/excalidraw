@@ -49,6 +49,7 @@ function migrateElementWithProperties<T extends ExcalidrawElement>(
     height: element.height || 0,
     seed: element.seed ?? 1,
     groupIds: element.groupIds || [],
+    isLocked: element.isLocked || false,
   };
 
   return {
