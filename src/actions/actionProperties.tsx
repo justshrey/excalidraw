@@ -463,8 +463,8 @@ export const actionChangeLockedStatus = register({
       commitToHistory: true,
     };
   },
-  contextItemLabel: "labels.locked",
-  contextMenuOrder: 3,
+  //contextItemLabel: "labels.locked",
+  //contextMenuOrder: 3,
   keyTest: (event) =>
     event[KEYS.CTRL_OR_CMD] &&
     event.altKey &&
