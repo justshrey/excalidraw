@@ -384,7 +384,7 @@ export const renderElement = (
         element.y + sceneState.scrollY,
       );
       const fillStyle = context.fillStyle;
-      context.fillStyle = "rgba(0, 0, 255, 0.10)";
+      context.fillStyle = "rgba(251, 234, 50, 0.10)";
       context.fillRect(0, 0, element.width, element.height);
       context.fillStyle = fillStyle;
       context.translate(
